@@ -17,8 +17,8 @@ export default () => ({
   stripe: {
     public_key: process.env.PUBLIC_KEY,
     secret_key: process.env.SECRET_KEY,
-    successUrl: 'http://localhost:3000/order-success',
-    cancelUrl: 'http://localhost:3000/order-cancel',
+    successUrl: process.env.SUCCESS_URL,
+    cancelUrl: process.env.CANCEL_URL,
     webhook_secret: process.env.WEBHOOK_SECRET,
   },
 });

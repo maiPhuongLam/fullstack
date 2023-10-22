@@ -43,7 +43,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalInterceptors(new LoggerInterceptor());
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: '*',
   });
   await app.listen(configuration().port);
   console.log(`server is running on ${configuration().port}`);
