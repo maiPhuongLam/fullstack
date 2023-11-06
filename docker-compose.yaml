@@ -3,7 +3,7 @@ services:
   next:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     container_name: next
     ports:
       - "3000:3000"
@@ -15,7 +15,7 @@ services:
   api:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     container_name: api
     ports:
       - ":3100"
