@@ -15,7 +15,6 @@ const AllOrders = () => {
   const { addToast } = useToasts();
   const [orders, setOrders] = React.useState([]);
   const [status, setStatus] = React.useState<string>("Filter by status");
-  const abortController = new AbortController();
   const fetchItems = async (status?: string) => {
     try {
       const response = await Orders.getAllOrders(status);
@@ -53,9 +52,6 @@ const AllOrders = () => {
 
     getItems();
 
-    return function cancel() {
-      abortController.abort();
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

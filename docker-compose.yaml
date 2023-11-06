@@ -1,0 +1,50 @@
+version: "3.8"
+services:
+  next:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: next
+    ports:
+      - "3000:3000"
+    env_file:
+      - frontend/.env
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: api
+    ports:
+      - ":3100"
+    volumes:
+      - ./src:/api/src
+    depends_on:
+      - mongo
+    # environment:
+    #   DB_URL: ${DB_URL}
+    #   PORT: ${PORT}
+    #   ADMIN_SECRET_TOKEN: ${ADMIN_SECRET_TOKEN}
+    #   PASS_EMAIL_GOOGLE: ${PASS_EMAIL_GOOGLE}
+    #   JWT_SECRET_TOKEN: ${JWT_SECRET_TOKEN}
+    #   CLOUD_NAME: ${CLOUD_NAME}
+    #   API_KEY: ${API_KEY}
+    #   API_SECRET: ${API_SECRET}
+    #   FOLDER_PATH: ${FOLDER_PATH}
+    #   PUBLIC_ID_PREFIX: ${PUBLIC_ID_PREFIX}
+    #   PUBLIC_KEY: ${PUBLIC_KEY}
+    #   SECRET_KEY: ${SECRET_KEY}
+    #   WEBHOOK_SECRET: ${WEBHOOK_SECRET}
+    #   APP_PREFIX: ${APP_PREFIX}
+    #   FILE_STORAGE_PATH: ${FILE_STORAGE_PATH}
+    #   SUCCESS_URL: ${SUCCESS_URL}
+    #   CANCEL_URL: ${CANCEL_URL}
+    env_file:
+      - backend/.env
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
